@@ -33,7 +33,7 @@ body {
 
 
 	<div id="content">
-		<h1>這是主頁</h1>
+		<h1>這是起始頁</h1>
 	</div>
 
 
