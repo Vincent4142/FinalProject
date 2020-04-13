@@ -19,7 +19,7 @@ body {
 #content {
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 1100px;
+	height: 1200px;
 	margin-top: -21px;
 	margin-bottom: 0px;
 	margin: auto;
@@ -30,8 +30,17 @@ body {
 	cursor: pointer;
 }
 
+select {
+	width: 99%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
 /* Full-width input fields */
-input[type=text], input[type=password],input[type=date],select {
+input[type=text], input[type=password],input[type=date] {
 	width: 95%;
 	padding: 15px;
 	margin: 5px 0 22px 0;
@@ -124,33 +133,36 @@ button:hover {
 					placeholder="8個以上包含半型英文和數字" name="psw-repeat" >
 					
 				
-				<label for="idnum"><b>身分證號碼</b></label> <input type="text"
-					placeholder="身分證號碼" name="idnum" > 
+				<label for="id"><b>身分證號碼</b></label> <input type="text"
+					placeholder="身分證號碼" name="id" > 
 				
 					
-				<label for="birthdate"><b>出生年月日</b></label>
-				<input type="date" id="birthdate" name="birthdate" placeholder="2014-09-18">	
+				<label for="birth"><b>出生年月日</b></label>
+				<input type="date" id="birthdate" name="birth" placeholder="2014-09-18">	
+				
+				
+				<label for="gender"><b>性別</b></label><br>
+      				<select  id="sex" name="gender">
+        				<option value="male" selected>男</option>
+        				<option value="female">女</option>
+      				</select><br>
 				
 				
 				<label for="tel"><b>電話</b></label> <input type="text"
 					placeholder="電話號碼" name="tel" > 
 					
 				
-				<label for="address"><b>地址</b></label> <input type="text"
-					placeholder="地址" name="address" > 	
+				<label for="addr"><b>地址</b></label> <input type="text"
+					placeholder="地址" name="addr" > 	
 				
 				
 				
 				
 					
-				<!--  	
-				<label for="sex"><b>性別</b></label><br>
-      				<select class="form-control" id="sex" name="sex">
-        				<option value="male" selected>男</option>
-        				<option value="female">女</option>
-      				</select><br>
+				 	
+				
       			
-      			
+      			<!-- 
       			<label for="country"><b>國家/地區</b></label><br>
       				<select class="form-control" id="country" name="country">
         				<option value="taiwan" selected>台灣</option>
@@ -173,8 +185,8 @@ button:hover {
 					
 					 
 					
-				<label><input type="checkbox" checked="checked" name="remember"
-					style="margin-bottom: 15px"> Remember me
+				<label ><input type="checkbox" checked="checked" name="ad"
+					style="margin-bottom: 15px;">同意寄送最新產品廣告
 				</label>
 
 				<p>

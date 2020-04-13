@@ -61,7 +61,7 @@
 
 			<div id="navright">
 				<li><a href="customerServicePage.jsp">客服支援</a></li>
-				<li><a href="LoginPage.jsp">登入</a></li>
+				<li><a href="loginSystem.jsp">登入</a></li>
 				<li><a href="shoppingcartPage.jsp">購物車清單</a></li>
 			</div>
 		</ul>

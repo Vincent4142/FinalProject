@@ -1,13 +1,14 @@
 package sampple.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,19 @@ public class Users {
 	private String email;
 	private String password;
 	private String deleteFlag;
+	private String status;
+	private Uinfo uinfo;
+	
+	
+	public Users() {
+	}
+
+	public Users(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+
+	
 	
 	@Id
 	@Column(name = "sys_sn")
@@ -55,6 +69,26 @@ public class Users {
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+	public Uinfo getUinfo() {
+		return uinfo;
+	}
+
+	public void setUinfo(Uinfo uinfo) {
+		this.uinfo = uinfo;
+	}
+
+	
 	
 	
 }
