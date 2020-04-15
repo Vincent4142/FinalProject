@@ -1,5 +1,7 @@
 package sampple.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ import sampple.model.dao.UsersDAO;
 public class UsersService {
 private UsersDAO usersDao;
 	
+	public UsersService() {
+		
+	}
+
 	@Autowired
 	public UsersService(UsersDAO usersDao) {
 		this.usersDao = usersDao;
@@ -43,7 +49,28 @@ private UsersDAO usersDao;
 	 *  @return boolean
 	 *  
 	 * */
-	public boolean update(Users user, String type) {
+	public boolean updatePwd(Users user, String type) {
 		return usersDao.updatePwd(user, type);
+	}
+	
+	public boolean updateStatus(int syssn) {
+		return usersDao.updateStatus(syssn);
+	}
+	
+	public boolean verifyEmail(String email) {
+		return usersDao.verifyEmail(email);
+	}
+	
+	public Users query(String email){
+		return usersDao.query(email);
+	}
+	
+	public boolean updatePassword(String email,String password) {
+		
+		return usersDao.updatePassword(email, password);
+	}
+	
+	public List<Users> queryAll(){
+		return usersDao.queryAll();
 	}
 }

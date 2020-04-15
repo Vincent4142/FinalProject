@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name="viewport"
-	content="width=device-width, initial-scale=1">
-<title>LoginPage</title>
+<meta charset="UTF-8">
+<title>forgetPwdPage</title>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
 body {
 	background-color: #E8E8E8;
@@ -25,7 +25,6 @@ body {
 	
 	width: 800px
 }
-
 form {
 	border: 3px solid #f1f1f1;
 }
@@ -100,40 +99,32 @@ span.psw {
 </style>
 </head>
 <body>
-
-	<%@ include file="fragment/indexTOP.jsp"%>
-
-
-	<div id="content">
-		<h2>用戶登入</h2>
-
-		<form action="<c:url value="/login" />" method="post">
+<%@ include file="fragment/indexTOP.jsp"%>
 
 
+<div id="content">
+
+	<h2>忘記密碼?</h2>
+
+		<form action="<c:url value="/memorycover" />" method="post">
+
+			<h2>輸入您的帳號(信箱)即可開始</h2>
 			<div class="container">
-				<label for="uname"><b>帳號</b></label> <input type="text"
-					placeholder="請輸入帳號" name="userName" required> <label
-					for="psw"><b>密碼</b></label> <input type="password"
-					placeholder="請輸入密碼" name="userPwd" required>
-
-				<button type="submit">登入</button>
+				<label for="uname"><b>帳號(信箱)</b></label> <input type="text"
+					placeholder="請輸入帳號" name="email" required> <br>
+				<b style="color:red">${errors.no}</b>
+				<button type="submit">繼續</button>
 				
-				<a href="forgetPwdPage.jsp">忘記密碼?</a>
+				<h3>我們將寄送密碼重置信件協助您修改密碼</h3>
 			</div>
 
-			<div class="container">
-				還沒有註冊?<a  class="signbtn" href="RigsterPage.jsp">建立新帳號</a>
-
-			</div>
+			
 		</form>
 
 
-	</div>
+</div>
 
 
-
-
-	<%@ include file="fragment/indexBOTTOM.jsp"%>
-
+<%@ include file="fragment/indexBOTTOM.jsp"%>
 </body>
 </html>

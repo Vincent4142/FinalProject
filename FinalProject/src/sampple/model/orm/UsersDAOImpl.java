@@ -1,5 +1,8 @@
 package sampple.model.orm;
 
+
+import java.util.List;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -93,5 +96,89 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		return status;
 	}
+	@Override
+	public boolean updateStatus(int syssn) {
+		boolean status = false;
+		
+		try {
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query=session.createQuery("from Users where SYS_SN=:sys",Users.class);
+		query.setParameter("sys", syssn);
+		Users user = query.getSingleResult();
+		//List<Users> list = query.list();
+		//Users user = list.get(0);
+		
+		
+		user.setStatus("Y");
+		session.update(user);
+		status = true;
+		
+		}catch (Exception e) {
+			logger.log(Level.ERROR, e);
+		}
+		return status;
+	}
+	@Override
+	public boolean verifyEmail(String email) {
+		boolean status = false;
+		
+		try {
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query=session.createQuery("from Users where EMAIL=:email",Users.class);
+		query.setParameter("email", email);
+		Users user = query.getSingleResult();
+		//List<Users> list = query.list();
+		//Users user = list.get(0);
+		
+		status = true;
+		
+		}catch (Exception e) {
+			//logger.log(Level.ERROR, e);
+			return status;
+		}
+		return status;
+	}
 
+	@Override
+	public Users query(String email) {
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query=session.createQuery("from Users where EMAIL=:email",Users.class);
+		query.setParameter("email", email);
+		Users user = query.getSingleResult();
+		return user;
+	}
+	
+	@Override
+	public boolean updatePassword(String email,String password) {
+		boolean status = false;
+		
+		try {
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query=session.createQuery("from Users where EMAIL=:email",Users.class);
+		query.setParameter("email", email);
+		Users user = query.getSingleResult();
+		//List<Users> list = query.list();
+		//Users user = list.get(0);
+		
+		
+		user.setPassword(password);
+		session.update(user);
+		status = true;
+		System.out.println("DAO test.");
+		}catch (Exception e) {
+			logger.log(Level.ERROR, e);
+		}
+		return status;
+	}
+	
+	@Override
+	public List<Users> queryAll() {
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query = session.createQuery("from Users",Users.class);
+		
+		List<Users> list = query.list();
+		
+		return list;
+	}
+	
 }

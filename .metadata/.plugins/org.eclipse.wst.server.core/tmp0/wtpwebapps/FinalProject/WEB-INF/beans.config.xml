@@ -62,6 +62,29 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 	    <property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	
+	<!-- 使用Quartz來設定排程 -->
+	<bean id="targetClass" class="sampple.util.AdMailUtils"/>
+
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    	<property name="targetObject" ref="targetClass"/>
+    	<property name="targetMethod" value="executeMethod"/>
+	</bean>
+
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    	<property name="jobDetail" ref="jobDetail"/>
+    	<!-- 設定例行執行時間-->
+    	<property name="cronExpression" value="0 */1 * * * ?"/>
+	</bean>
+
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="triggers">
+        	<list>
+            	<ref bean="cronTrigger"/>
+        	</list>
+    	</property>
+	</bean>
 
 
 </beans>

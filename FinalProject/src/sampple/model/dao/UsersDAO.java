@@ -1,5 +1,7 @@
 package sampple.model.dao;
 
+import java.util.List;
+
 import sampple.model.Users;
 
 public interface UsersDAO {
@@ -30,4 +32,14 @@ public interface UsersDAO {
 	 * 
 	 */
 	public boolean updatePwd(Users user, String type);
+	
+	public boolean updateStatus(int syssn);
+	
+	public boolean verifyEmail(String email);
+	
+	public Users query(String email);
+	
+	public boolean updatePassword(String email,String password);
+	
+	public List<Users> queryAll();
 }

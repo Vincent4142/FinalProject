@@ -79,7 +79,7 @@ public class Uinfo {
 		this.id = id;
 	}
 	
-	@Column(name="type")
+	@Column(name="u_type")
 	public String getUtype() {
 		return utype;
 	}

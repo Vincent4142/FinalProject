@@ -114,7 +114,7 @@ button:hover {
 
 
 	<div id="content">
-		<form action="<c:url value="/signup" />" style="border: 1px solid #ccc">
+		<form action="<c:url value="/signup" />" style="border: 1px solid #ccc" method="Post">
 			<div class="container">
 				<h1>註冊</h1>
 				<p>請填寫此表格以創建一個帳戶。</p>
@@ -127,7 +127,7 @@ button:hover {
 					placeholder="電子郵件信箱" name="email" > 
 					
 				<label for="psw"><b>密碼</b></label> <input type="password"
-					placeholder="8個以上包含半型英文和數字" name="psw" > 
+					placeholder="8個以上包含半型英文和數字" name="password" > 
 					
 				<label for="psw-repeat"><b>再次輸入密碼</b></label> <input type="password"
 					placeholder="8個以上包含半型英文和數字" name="psw-repeat" >
@@ -185,7 +185,7 @@ button:hover {
 					
 					 
 					
-				<label ><input type="checkbox" checked="checked" name="ad"
+				<label ><input type="checkbox" checked="checked" name="ademail" value="Y"
 					style="margin-bottom: 15px;">同意寄送最新產品廣告
 				</label>
 

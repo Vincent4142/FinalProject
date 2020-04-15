@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name="viewport"
-	content="width=device-width, initial-scale=1">
-<title>LoginPage</title>
+<meta charset="UTF-8">
+<title>updatePwdPage</title>
 <style type="text/css">
 body {
 	background-color: #E8E8E8;
@@ -25,7 +24,6 @@ body {
 	
 	width: 800px
 }
-
 form {
 	border: 3px solid #f1f1f1;
 }
@@ -101,30 +99,27 @@ span.psw {
 </head>
 <body>
 
-	<%@ include file="fragment/indexTOP.jsp"%>
+<%@ include file="fragment/indexTOP.jsp"%>
 
+<div id="content">
+		<h2>修改密碼</h2>
 
-	<div id="content">
-		<h2>用戶登入</h2>
+		<form action="<c:url value="/memorycover.action" />" method="post">
 
-		<form action="<c:url value="/login" />" method="post">
-
-
+			<input type="text" name="email" value=${ email} readonly="readonly" />
 			<div class="container">
-				<label for="uname"><b>帳號</b></label> <input type="text"
-					placeholder="請輸入帳號" name="userName" required> <label
-					for="psw"><b>密碼</b></label> <input type="password"
-					placeholder="請輸入密碼" name="userPwd" required>
+				<label for="psw"><b>請輸入密碼</b></label> <input type="password"
+					placeholder="請輸入密碼" name="password" required> 
+					
+				<label for="psw-repeat"><b>請再次輸入密碼</b></label> <input type="password"
+					placeholder="請再次輸入密碼" name="pwd-repeat" required>
 
-				<button type="submit">登入</button>
+				<button type="submit">完成修改</button>
 				
-				<a href="forgetPwdPage.jsp">忘記密碼?</a>
+				
 			</div>
 
-			<div class="container">
-				還沒有註冊?<a  class="signbtn" href="RigsterPage.jsp">建立新帳號</a>
-
-			</div>
+			
 		</form>
 
 
@@ -133,7 +128,10 @@ span.psw {
 
 
 
-	<%@ include file="fragment/indexBOTTOM.jsp"%>
+
+
+
+<%@ include file="fragment/indexBOTTOM.jsp"%>
 
 </body>
 </html>
