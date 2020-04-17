@@ -1063,3 +1063,7 @@ java.io.FileNotFoundException: C:\DataSource\apache-maven-3.6.3\bin\m2.conf (¨t²
 2020-04-17 12:15:11,532 6312   [ker-6: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
 2020-04-17 12:15:13,067 7847   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
 2020-04-17 12:15:13,069 7849   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
+2020-04-17 13:13:06,952 6432   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
+2020-04-17 13:13:06,980 6460   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
+2020-04-17 13:13:08,163 7643   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
+2020-04-17 13:13:08,165 7645   [ker-8: Building] WARN  nternal.embedder.EclipseLogger  - Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!

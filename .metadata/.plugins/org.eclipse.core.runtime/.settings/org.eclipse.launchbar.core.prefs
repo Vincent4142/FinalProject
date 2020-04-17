@@ -11,5 +11,6 @@ org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:/index.jsp/activeLaun
 org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:/index.jsp/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.wst.server\:Tomcat v9.0 Server at localhost
 org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:FinalProject/activeLaunchMode=run
 org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:FinalProject/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.wst.server\:Tomcat v9.0 Server at localhost
+org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:FinalProjectDemo/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.wst.server\:Tomcat v9.0 Server at localhost
 org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:FinalProject_/activeLaunchMode=run
 org.jboss.tools.wtp.server.launchbar.ModuleDescriptorType\:FinalProject_/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.wst.server\:Tomcat v9.0 Server at localhost
