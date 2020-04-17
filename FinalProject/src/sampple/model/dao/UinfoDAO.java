@@ -26,4 +26,6 @@ public interface UinfoDAO {
 	 *  
 	 * */
 	public boolean updateInfo(Uinfo uinfo);
+	
+	
 }

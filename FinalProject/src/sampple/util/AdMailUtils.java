@@ -72,7 +72,7 @@ public class AdMailUtils {
         		message.setSubject("台灣sampple網廣告信~");
         		//郵件內容
         		//String emailMsg = buildMsg(subject,userName,url);
-        		message.setContent("emailMsg_test", "text/html;charset=utf-8");
+        		message.setContent("AD-emailMsg_test", "text/html;charset=utf-8");
 
             
         		//創建 Transport用來發送郵件
@@ -110,7 +110,7 @@ public class AdMailUtils {
             // 讀入
             while ((line = br.readLine()) != null) {
                 builder.append(line);
-                builder.append(",");
+                //builder.append(",");
             }
             // 分組傳回
             return builder.toString().split(",");

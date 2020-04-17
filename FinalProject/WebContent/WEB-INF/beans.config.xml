@@ -64,21 +64,45 @@
 	</bean>
 	
 	
+  	  
 	<!-- 使用Quartz來設定排程 -->
 	<bean id="targetClass" class="sampple.util.AdMailUtils"/>
-
+	<!--定時器具體作業 -->
 	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     	<property name="targetObject" ref="targetClass"/>
     	<property name="targetMethod" value="executeMethod"/>
-	</bean>
-
-	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	</bean> 
+	 
+	<!--觸發點(方法一) -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
     	<property name="jobDetail" ref="jobDetail"/>
-    	<!-- 設定例行執行時間-->
-    	<!-- 1分鐘執行一次 -->
-    	<property name="cronExpression" value="0 */1 * * * ?"/>
+    	<!-- 設定例行執行時間  1分鐘執行一次   -->
+    	<property name="repeatInterval"><value>60000</value></property>
+    	
+    	<property name="startDelay"><value>0</value></property>
+    	<!-- 重複次數：0  去掉的話按結束時間算-->
+        <property name="repeatCount">
+            <value>0</value>
+        </property>
+    	
 	</bean>
-
+	
+	
+   <!--觸發點(方法二)按週期執行的任務
+    <bean id="cronTrigger"
+        class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="jobDetail" />
+        </property>
+        cron表示式，此處是每天10點42執行
+        <property name="cronExpression">
+            <value>0 42 10 * * ?</value>
+        </property>
+        
+    </bean>
+ 	-->
+ 	
+	<!-- 排程器工廠-->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     	<property name="triggers">
         	<list>
@@ -86,6 +110,6 @@
         	</list>
     	</property>
 	</bean>
-
+  
 
 </beans>

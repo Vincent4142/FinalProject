@@ -44,4 +44,6 @@ private UinfoDAO uinfoDao;
 	public boolean update(Uinfo uinfo) {
 		return uinfoDao.updateInfo(uinfo);
 	}
+	
+	
 }

@@ -5,231 +5,501 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RigsterPage</title>
+<title>註冊</title>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- TWzipcode -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
-<style type="text/css">
-body {
-	background-color: #E8E8E8;
-	margin: 0px;
-	padding: 0px;
-}
+<!-- JQuery UI -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 
-#content {
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 1200px;
-	margin-top: -21px;
-	margin-bottom: 0px;
-	margin: auto;
-	width: 800px
-}
+<!-- style -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-#rule:hover{
-	cursor: pointer;
-}
 
-select {
-	width: 99%;
-	padding: 15px;
-	margin: 5px 0 22px 0;
-	display: inline-block;
-	border: none;
-	background: #f1f1f1;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password],input[type=date] {
-	width: 95%;
-	padding: 15px;
-	margin: 5px 0 22px 0;
-	display: inline-block;
-	border: none;
-	background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-	background-color: #ddd;
-	outline: none;
-}
-
-hr {
-	border: 1px solid #f1f1f1;
-	margin-bottom: 25px;
-}
-
-/* Set a style for all buttons */
-button {
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	opacity: 0.9;
-}
-
-button:hover {
-	opacity: 1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-	padding: 14px 20px;
-	background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-	float: left;
-	width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-	padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-	.cancelbtn, .signupbtn {
-		width: 100%;
-	}
-}
-</style>
-
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 </head>
 <body>
+	<jsp:include page="fragment/indexTOP.jsp" />
 
-	<%@ include file="fragment/indexTOP.jsp"%>
+	<div class="container">
+		<div class="card bg-light">
 
+			<article class="card-body mx-auto" style="max-width: 800px;">
+				<h4 class="rexColor1 card-title mt-3 text-center">註冊會員</h4>
+				<p class="rexColor1 text-center">Get started with your free
+					account</p>
+				<form action="<c:url value="/signup" />" method="Post" id="form1" onsubmit="return checksubmit();">
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-envelope"></i>
+							</span>
+						</div>
+						<input id="userName" name="email" class="form-control" type="email"
+							placeholder="(*)請輸入帳號(信箱)…" autocomplete="off" required="required"
+							title="example@gmail.com"  onblur="checkReg1()" />
+					</div>
+					<!-- javaScript空標籤 -->
+					<p class="text-center rexColor1">
+						<span id="img1"></span><span id="txt1"></span>
+					</p>
+					<!-- CheckReg()1 -->
+					<script type="text/javascript">
 
-	<div id="content">
-		<form action="<c:url value="/signup" />" style="border: 1px solid #ccc" method="Post">
-			<div class="container">
-				<h1>註冊</h1>
-				<p>請填寫此表格以創建一個帳戶。</p>
-				<hr>
-				
-				<label for="name"><b>暱稱</b></label> <input type="text"
-					placeholder="10個以內的文字" name="name" > 
-				
-				<label for="email"><b>Email(帳號)</b></label> <input type="text"
-					placeholder="電子郵件信箱" name="email" > 
+						function checksubmit(){
+							if(document.getElementById("txt1").innerHTML=="此帳號已重複"){
+								window.alert("帳號欄位不正確，請重新輸入");
+								return false;
+							}else{
+								return true;
+							}
+						}
 					
-				<label for="psw"><b>密碼</b></label> <input type="password"
-					placeholder="8個以上包含半型英文和數字" name="password" > 
 					
-				<label for="psw-repeat"><b>再次輸入密碼</b></label> <input type="password"
-					placeholder="8個以上包含半型英文和數字" name="psw-repeat" >
+						// callback function
+						function checkReg1() {
+							var rexEmail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+							var imgValue = document.getElementById("img1")
+							var txtValue = document.getElementById("txt1")
+							var emailValue = document.getElementById("userName").value
+							// 不能為空值
+							if (emailValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">';
+								txtValue.innerHTML = '帳號不能空白';
+							}
+							// Email格式驗證
+							else if (emailValue.search(rexEmail) == -1) {
+								imgValue.innerHTML = '<i class="fa fa-times">';
+								txtValue.innerHTML = '錯誤Email格式';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+								$.ajax({
+									url : "http://localhost:8080/FinalProject/check",
+									data : "&email=" + emailValue,
+									type : "GET",
+									success : function(data) {
+										var status=eval(data);
+										
+										
+										if(status){
+											txtValue.innerHTML ="";
+											txtValue.innerHTML = "此帳號已重複";
+										}
+										else{
+											txtValue.innerHTML ="";
+											txtValue.innerHTML = "可申請";
+										}
+											
+										
+											
+										
+									}
+								})	
+							}
+							//if (txtValue == "") {
+								
+							//}
+						}
+					</script>
+					<!-- form-group// -->
+
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-lock"></i>
+							</span>
+						</div>
+						<input id="pwd" name="password" class="form-control" type="password"
+							placeholder="(*)請輸入密碼…" required="required"
+							title="至少6個字且必須包含英文字母、數字" onblur="checkReg2()" />
+
+						<!-- 二次密碼  -->
+
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-lock"></i>
+							</span>
+						</div>
+						<input id="repwd" class="form-control" type="password"
+							placeholder="(*)二次密碼…" onblur="checkReg3()" required="required"/>
+					</div>
+					<!-- javaScript空標籤 -->
+					<div>
+						<p class="text-center rexColor1" style="float: left;">
+							<span class="rexColor1">
+								<span id="img2"></span><span id="txt2"></span>
+							</span>
+						</p>
+						<p class="text-center rexColor1" style="float: right;">
+							<span class="rexColor1">
+								<span id="img3"></span><span id="txt3"></span>
+							</span>
+						</p>
+					</div>
+					<!-- CheckReg2()、CheckReg3() -->
+					<script type="text/javascript">
+						// callback function
+						function checkReg2() {
+							var rexEng = /[A-Za-z]/
+							var rexNum = /[0-9]/
+							var imgValue = document.getElementById("img2")
+							var txtValue = document.getElementById("txt2")
+							var pwdValue = document.getElementById("pwd").value
+							// 不能為空值
+							if (pwdValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '密碼不能空白';
+							}
+							// 至少六個字
+							else if (pwdValue.length < 6) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '至少六個字';
+							}
+							// 判斷英文
+							else if (!rexEng.test(pwdValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '沒有英文';
+							}
+							// 判斷數字
+							else if (!rexNum.test(pwdValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '沒有數字';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+							}
+						}
+						// callback function
+						function checkReg3() {
+							var rexEng = /[A-Za-z]/
+							var rexNum = /[0-9]/
+							var imgValue = document.getElementById("img3")
+							var txtValue = document.getElementById("txt3")
+							var pwdValue = document.getElementById("pwd").value
+							var repwdValue = document.getElementById("repwd").value
+							// 不能為空值
+							if (repwdValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '二次密碼不能空白';
+							}
+							// 至少六個字
+							else if (repwdValue.length < 6) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '至少六個字';
+							}
+							// 判斷英文
+							else if (!rexEng.test(repwdValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '沒有英文';
+							}
+							// 判斷數字
+							else if (!rexNum.test(repwdValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '沒有數字';
+							} 
+							// 密碼相等
+							else if(repwdValue != pwdValue) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '二次密碼和密碼不同';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+							}
+						}
+					</script>
+					<!-- form-group// -->
 					
-				
-				<label for="id"><b>身分證號碼</b></label> <input type="text"
-					placeholder="身分證號碼" name="id" > 
-				
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-user"></i>
+							</span>
+						</div>
+						<input id="nickName" name="name" class="form-control" type="text"
+							 placeholder="(*)請輸入暱稱…" maxlength="8" required="required"
+							 onblur="checkReg4()" autocomplete="off" />
+
+						<!-- 身分證  -->
+						
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-key"></i></span>
+						</div>
+						<input id="userId" name="id" class="form-control" type="text"
+							placeholder="(*)請輸入身分證…" maxlength="10" required="required"
+							onblur="checkReg5()"/>
+					</div>
+					<!-- javaScript空標籤 -->
+					<div>
+						<p class="text-center rexColor1" style="float: left;">
+							<span class="rexColor1">
+								<span id="img4"></span><span id="txt4"></span>
+							</span>
+						</p>
+						<p class="text-center rexColor1" style="float: right;">
+							<span class="rexColor1">
+								<span id="img5"></span><span id="txt5"></span>
+							</span>
+						</p>
+					</div>
+					<!-- CheckReg4()、CheckReg5() -->
+					<script type="text/javascript">
+						// callback function
+						function checkReg4() {
+							var rexMark = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E]/
+							var imgValue = document.getElementById("img4")
+							var txtValue = document.getElementById("txt4")
+							var nickValue = document.getElementById("nickName").value
+							// 不能為空值
+							if (nickValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '暱稱不能空白';
+							}
+							// 不能有標點符號 
+							else if (rexMark.test(nickValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '不能有標點符號';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+							}
+						}
+						// callback function
+						function checkReg5() {
+							var rexid = /^[a-z](1|2)\d{8}$/i;
+							var imgValue = document.getElementById("img5")
+							var txtValue = document.getElementById("txt5")
+							var idValue = document.getElementById("userId").value
+							// 不能為空值
+							if (idValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '身分證不能空白';
+							}
+							// 至少十個字
+							else if (idValue.length < 9) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '字數不對';
+							}
+							// 格式驗證 
+							else if (!rexEng.test(idValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '格式不符';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+							}
+						}
+					</script>
+					<!-- form-group// -->
 					
-				<label for="birth"><b>出生年月日</b></label>
-				<input type="date" id="birthdate" name="birth" placeholder="2014-09-18">	
-				
-				
-				<label for="gender"><b>性別</b></label><br>
-      				<select  id="sex" name="gender">
-        				<option value="male" selected>男</option>
-        				<option value="female">女</option>
-      				</select><br>
-				
-				
-				<label for="tel"><b>電話</b></label> <input type="text"
-					placeholder="電話號碼" name="tel" > 
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-tag"></i></span>
+						</div>
+						<select id="gender" class="form-control" name="gender">
+							<option value="">請選擇性別</option>
+							<option value="male">男</option>
+							<option value="female">女</option>
+						</select>
+
+						<!-- 出生年月日  -->
+
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-building"></i>
+							</span>
+						</div>
+						<input id="birth" name="birth" class="form-control" placeholder="出生年月日…"
+							type="date">
+					</div>
+					<!-- form-group// -->
+
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i
+								class="fa fa-address-card"></i></span>
+						</div>
+						<div id="twzipcode" class="">
+							<div class="f5" data-role="county"></div>
+							<div class="f6" data-role="district"></div>
+							<input id="address" name="addr" class="form-control" type="text"
+								placeholder="(*)地址…" size="25" onblur="checkReg6()" required="required" />
+						</div>
+					</div>
+					<!-- javaScript空標籤 -->
+					<p class="text-center rexColor1">
+						<span id="img6"></span><span id="txt6"></span>
+					</p>
+					<!-- CheckReg6() -->
+					<script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+					<script type="text/javascript">
+						$("#twzipcode").twzipcode({
+							zipcodeIntoDistrict: true,
+							"css": ["city form-control", "town form-control"],
+							countyName: 'county', // 設定取得縣市的name
+						    districtName: 'district', // 設定取得鄉鎮市區的name
+							//  選擇縣市後執行
+							onCountySelect: function() {
+								var county = $("select[name='county']").val();
+								$("#address").val(county);
+							},
+							//  選擇鄉鎮市區後執行
+				    	  	onDistrictSelect: function() {
+				    	  		var district = $("select[name='district']").val();
+								var cityValue = $("#address").val();
+								addrValue = cityValue + district;
+								$("#address").val(addrValue);
+							}  
+						})
+						
+						// callback function
+						function checkReg6() {
+							var rexChina = /^[\u4E00-\u9FA5]/
+							var imgValue = document.getElementById("img6")
+							var txtValue = document.getElementById("txt6")
+							var addrValue = document.getElementById("address").value
+							// 不能為空值
+							if (nickValue == "") {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '地址不能空白';
+							}
+							// 必須有中文
+							else if (rexChina.test(addrValue)) {
+								imgValue.innerHTML = '<i class="fa fa-times">'
+								txtValue.innerHTML = '必須有中文';
+							} else {
+								imgValue.innerHTML = "";
+								txtValue.innerHTML = "";
+							}
+						}
+					</script>
+					<!-- form-group// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-phone"></i>
+							</span>
+						</div>
+						<input id="ph" name="tel" class="form-control" type="text"
+							 placeholder="請輸入電話…" maxlength="10">
+					</div>
+					<!-- form-group// -->
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block">
+							註冊</button>
+					</div>
 					
-				
-				<label for="addr"><b>地址</b></label> <input type="text"
-					placeholder="地址" name="addr" > 	
-				
-				
-				
-				
-					
-				 	
-				
-      			
-      			<!-- 
-      			<label for="country"><b>國家/地區</b></label><br>
-      				<select class="form-control" id="country" name="country">
-        				<option value="taiwan" selected>台灣</option>
-        				<option value="usa">美國</option>
-        				<option value="japan">日本</option>
-        				<option value="korea">韓國</option>
-        				<option value="china">中國</option>
-      				</select><br>
-      			
-      			
-      			<label for="timezone"><b>時區</b></label><br>
-      				<select class="form-control" id="timezone" name="timezone">
-        				<option value="UTC+8/tai" selected>(UTC+8)taiwan</option>
-        				<option value="UTC-6">UTC-6</option>
-        				<option value="UTC+9/jap">(UTC+9)japan</option>
-        				<option value="UTC+9/kor">(UTC+9)korea</option>
-        				<option value="UTC+8/ch">(UTC+8)china</option>
-      				</select><br>		
-				-->	
-					
-					 
-					
-				<label ><input type="checkbox" checked="checked" name="ademail" value="Y"
+					<label ><input type="checkbox" checked="checked" name="ademail" value="Y"
 					style="margin-bottom: 15px;">同意寄送最新產品廣告
-				</label>
+					</label>
+					
+					<!-- form-group// -->
 
-				<p>
-					建立帳戶即表示您同意我們的 <label id="rule" style="color: dodgerblue;" onclick="rule()">條款及細則和私隱政策</label>
-				</p>
+					<p class="text-center">
+						<!-- Button trigger modal -->
+						<label data-toggle="modal" data-target="#exampleModalCenter"><a
+							href="#">隱私權條款</a></label> 已經註冊過了? <a class="rexColor1" href="loginSystem.jsp"><b>登入</b></a>
+					</p>
+					<div>
+						<input type="button" value="一鍵輸入" onclick="input()">
+					</div>
+					<p class="text-center rexColor1">
+						<span id="img"></span><span id="txt"></span>
+					</p>
+				</form>
+			</article>
+		</div>
+		<!-- card.// -->
+	</div>
+	<!--container end.//-->
 
-				<div class="clearfix">
-					<button type="reset" class="cancelbtn">清空</button>
-					<button type="submit" class="signupbtn">註冊</button>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">隱私權條例</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					一、隱私權保護政策的適用範圍
+					隱私權保護政策內容，包括本網站如何處理在您使用網站服務時收集到的個人識別資料。隱私權保護政策不適用於本網站以外的相關連結網站，也不適用於非本網站所委託或參與管理的人員。
+					<br> <br> 二、個人資料的蒐集、處理及利用方式
+					當您造訪本網站或使用本網站所提供之功能服務時，我們將視該服務功能性質，請您提供必要的個人資料，並在該特定目的範圍內處理及利用您的個人資料；非經您書面同意，本網站不會將個人資料用於其他用途。
+					本網站在您使用服務信箱、問卷調查等互動性功能時，會保留您所提供的姓名、電子郵件地址、聯絡方式及使用時間等。
+					於一般瀏覽時，伺服器會自行記錄相關行徑，包括您使用連線設備的IP位址、使用時間、使用的瀏覽器、瀏覽及點選資料記錄等，做為我們增進網站服務的參考依據，此記錄為內部應用，決不對外公佈。
+					為提供精確的服務，我們會將收集的問卷調查內容進行統計與分析，分析結果之統計數據或說明文字呈現，除供內部研究外，我們會視需要公佈統計數據及說明文字，但不涉及特定個人之資料。
+					<br> <br> 三、資料之保護
+					本網站主機均設有防火牆、防毒系統等相關的各項資訊安全設備及必要的安全防護措施，加以保護網站及您的個人資料採用嚴格的保護措施，只由經過授權的人員才能接觸您的個人資料，相關處理人員皆簽有保密合約，如有違反保密義務者，將會受到相關的法律處分。
+					如因業務需要有必要委託其他單位提供服務時，本網站亦會嚴格要求其遵守保密義務，並且採取必要檢查程序以確定其將確實遵守。 <br>
+					<br> 四、網站對外的相關連結
+					本網站的網頁提供其他網站的網路連結，您也可經由本網站所提供的連結，點選進入其他網站。但該連結網站不適用本網站的隱私權保護政策，您必須參考該連結網站中的隱私權保護政策。
+					<br> <br> 五、與第三人共用個人資料之政策
+					本網站絕不會提供、交換、出租或出售任何您的個人資料給其他個人、團體、私人企業或公務機關，但有法律依據或合約義務者，不在此限。 <br>
+					<br> 前項但書之情形包括不限於：<br> <br> 1.經由您書面同意。<br> <br>
+					2.法律明文規定。<br> <br> 3.為免除您生命、身體、自由或財產上之危險。<br> <br>
+					4.與公務機關或學術研究機構合作，基於公共利益為統計或學術研究而有必要，且資料經過提供者處理或蒐集著依其揭露方式無從識別特定之當事人。
+					<br> <br>
+					當您在網站的行為，違反服務條款或可能損害或妨礙網站與其他使用者權益或導致任何人遭受損害時，經網站管理單位研析揭露您的個人資料是為了辨識、聯絡或採取法律行動所必要者。
+					有利於您的權益。 <br> <br>
+					本網站委託廠商協助蒐集、處理或利用您的個人資料時，將對委外廠商或個人善盡監督管理之責。 <br> <br>
+					六、Cookie之使用
+					為了提供您最佳的服務，本網站會在您的電腦中放置並取用我們的Cookie，若您不願接受Cookie的寫入，您可在您使用的瀏覽器功能項中設定隱私權等級為高，即可拒絕Cookie的寫入，但可能會導至網站某些功能無法正常執行
+					。 <br> <br> 七、隱私權保護政策之修正
+					本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
+	<script type="text/javascript">
 
-
-
-
-	<%@ include file="fragment/indexBOTTOM.jsp"%>
-
-
-<script type="text/javascript">
-
-	function rule(){
-		
-		window.open('rule.txt','newwindow')
-		
-
-//		$.ajax({
-//			url:"rule.txt",
+		function input(){
 			
-//			dataType:"text",
-//			success:function(data){
-				
-				
-//			}
-
-//		});
-		
-		
-	}
+			$("#userName").val("w92532@hotmail.com");
+			$("#pwd").val("w41420");
+			$("#repwd").val("w41420");
+			$("#nickName").val("Vincent");
+			$("#userId").val("A123789456");
+			$("#gender").get(0).selectedIndex = 1;
+			$('#birth').val("2000-07-25");
+			$("#address").val("台北市中正區中正路10號");
+			$("#ph").val("0958744563");
+			checkReg1();
+			//form1.submit();
+			
+		}
 	
+		function showModal() {
+			$('#rule1').modal('show');
+		}
 
-</script>
-
+	</script>
 </body>
 </html>

@@ -16,11 +16,11 @@
    <libraries>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-spring-webmvc-5.2.4.RELEASE.jar/meta-inf/spring-form.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-spring-webmvc-5.2.4.RELEASE.jar/meta-inf/spring-form.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-spring-webmvc-5.2.4.RELEASE.jar/meta-inf/spring.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-spring-webmvc-5.2.4.RELEASE.jar/meta-inf/spring.tld" project="FinalProject"/>
     </library>
    </libraries>
   </path>
@@ -72,63 +72,63 @@
    <libraries>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0-rt.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0-rt.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0-rt.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0-rt.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fn.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fn.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/permittedtaglibs.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/permittedtaglibs.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/scriptfree.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/scriptfree.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0-rt.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0-rt.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0-rt.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0-rt.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0.tld" project="FinalProject"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x.tld" project="FinalProjectDemo"/>
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x.tld" project="FinalProject"/>
     </library>
    </libraries>
   </path>
@@ -166,16 +166,20 @@
   <core validator-id="jboss.cdi.core"/>
   <el>
    <linked-el length="12" name="%0" offset="2036" path="%1"/>
+   <linked-el length="13" name="%2" offset="2296" path="%3"/>
    <linked-el length="12" name="%2" offset="2036" path="%1"/>
-   <linked-el length="10" name="%3" offset="1813" path="%4"/>
+   <linked-el length="13" name="%4" offset="2296" path="%3"/>
+   <linked-el length="10" name="%5" offset="1976" path="%6"/>
   </el>
  </validation>
  <aliases>
   <alias path="/FinalProject/WebContent/forgetPwdPage.jsp" value="%1"/>
   <alias path="errors.no" value="%0"/>
-  <alias path="/FinalProject/WebContent/updatePwdPage.jsp" value="%4"/>
+  <alias path="/FinalProject/WebContent/updatePwdPage.jsp" value="%6"/>
+  <alias path="/FinalProject/WebContent/loginSystem.jsp" value="%3"/>
   <alias path="errors" value="%2"/>
-  <alias path="email" value="%3"/>
+  <alias path="errors.msg" value="%4"/>
+  <alias path="email" value="%5"/>
  </aliases>
  <includes/>
  <uris>

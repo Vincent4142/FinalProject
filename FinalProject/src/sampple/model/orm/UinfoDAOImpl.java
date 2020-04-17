@@ -71,5 +71,7 @@ public class UinfoDAOImpl implements UinfoDAO {
 
 		return status;
 	}
+	
+	
 
 }

@@ -32,51 +32,6 @@ public class UserSystem {
 		this.usersService = usersService;
 	}
 
-	/* login Check */
-	@PostMapping(path = "/login")
-	public String processLoginCheck(@RequestParam("email") String email, @RequestParam("password") String password,
-			Model model) {
-
-		Map<String, String> errors = new HashMap<>();
-		model.addAttribute("errors", errors);
-
-		if (email == null || email.length() == 0) {
-			errors.put("name", "name is required.");
-		}
-
-		if (password == null || password.length() == 0) {
-			errors.put("pwd", "password is required.");
-		}
-
-		if (!errors.isEmpty()) {
-			return "loginSystem.jsp";
-		}
-		
-		model.addAttribute("user", email);
-		model.addAttribute("pwd", password);
-		
-		String msg = usersService.query(new Users(email, password));
-
-		switch (msg) {
-		case "09":
-			// cant find user
-		case "04":
-			// user is frozen
-		case "02":
-			// wrong password
-		case "01":
-			/* cookie setting here */
-			
-			
-			// 轉至會員資料頁面
-			//return "loginSuccess";
-		default:
-			// error handler
-		}
-
-		
-		return "loginSystem.jsp";
-	}
 	
 	/* sign up controller */
 	@PostMapping(path = "/signup")
@@ -86,19 +41,17 @@ public class UserSystem {
 			@RequestParam("gender") String gender,@RequestParam("birth") String birth,
 			@RequestParam("tel") String tel,@RequestParam(defaultValue = "N", value = "ademail") String ademail,Model model) throws AddressException, MessagingException, GeneralSecurityException, IOException {
 		
-		System.out.println("test123:"+ademail);
+		
 		//送出註冊驗證信狀態
 		String type="sign";
-		//空值代表沒勾選，因此設為N
-		//if(ademail==null) {
-		//	ademail="N";
-		//}
+	
 		
 		// Step1. check user Input is match or not
 		Users users=new Users();
 		users.setEmail(email);
 		users.setPassword(password);
 		users.setStatus("N");
+		users.setDeleteFlag("N");
 		
 		Uinfo uinfo=new Uinfo();
 		uinfo.setName(name);
@@ -118,7 +71,8 @@ public class UserSystem {
 		//若同意寄送廣告，則將該用戶信箱加入email.txt
 		FileWriter fw=new FileWriter("C:/DataSource/FinalProject/FinalProject/WebContent/email.txt",true);
 		if(ademail.equalsIgnoreCase("Y")) {
-			fw.write(email+"\r\n");
+			//"\r\n"
+			fw.write(email+",");
 			fw.flush();
 			fw.close();
 		}

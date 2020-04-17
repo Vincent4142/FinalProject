@@ -1,7 +1,9 @@
 package sampple.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import sampple.model.Uinfo;
 import sampple.model.Users;
 
 public interface UsersDAO {
@@ -21,7 +23,7 @@ public interface UsersDAO {
 	 * @return String
 	 * 
 	 */
-	public String queryUser(Users user);
+	public Map<String, Object> queryUser(Users user);
 
 	/**
 	 * 修改密碼, 註銷帳號
@@ -41,5 +43,13 @@ public interface UsersDAO {
 	
 	public boolean updatePassword(String email,String password);
 	
-	public List<Users> queryAll();
+
+	
+	/**
+	 * 	身分驗證
+	 *  @param Users
+	 *  @param String
+	 *  
+	 * */
+	public Uinfo identity(Users user);
 }
