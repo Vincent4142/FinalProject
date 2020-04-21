@@ -107,7 +107,7 @@ span.psw {
 
 	<div id="content">
 		<h2>用戶登入</h2>
-
+		<h3>${msg} ${msgs} ${updatemsg}</h3>
 		<form action="<c:url value="/login" />" method="post" id="form1">
 
 

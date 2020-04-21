@@ -1,6 +1,7 @@
-﻿package sampple.filter;
+package sampple.filter;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,7 +20,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import sampple.model.Uinfo;
 import sampple.model.Users;
 import sampple.model.orm.UsersDAOImpl;
 import sampple.model.service.UsersService;
@@ -34,10 +34,9 @@ public class CheckLoginFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.filterConfig = filterConfig;
-		String sessionFactoryBeanName = filterConfig.getInitParameter("sessionFactoryBeanName");
 		ServletContext application = filterConfig.getServletContext();
 		context = WebApplicationContextUtils.getWebApplicationContext(application);
-		sessionFactory = (SessionFactory) context.getBean(sessionFactoryBeanName);
+		sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	}
 
 	@Override
@@ -46,41 +45,42 @@ public class CheckLoginFilter implements Filter {
 		// 轉換物件
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		
-			HttpSession session = httpServletRequest.getSession();
-			Uinfo ub = (Uinfo) session.getAttribute("identity");
-			// 有身分物件就放行
-			if (ub != null) {
-				chain.doFilter(request, response);
-			} else {
-				// 沒有則確認cookie，cookie時間是2小時，若cookie還存在則重新驗證
-				String userName = "";
-				String userPwd = "";
-				Cookie[] cookies = httpServletRequest.getCookies();
-				for (int i = 0; cookies != null && i < cookies.length; i++) {
-					if ("user".equals(cookies[i].getName())) {
-						String string = cookies[i].getValue();
-						String[] values = string.split("&");
-						userName = values[0];
-						userPwd = values[1];
-					}
-				}
-				UsersService us = new UsersService(new UsersDAOImpl(sessionFactory));
-				try {
-					ub = us.identity(new Users(userName, userPwd));
-					// 重新加入身分物件並放行
-					if (ub != null) {
-						httpServletRequest.getSession().setAttribute("identity", ub);
-						chain.doFilter(request, response);
-					} 
-					// cookie逾期，導回登入頁面
-					else {
-						httpServletResponse.sendRedirect("loginSystem.jsp");
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
+
+		HttpSession session = httpServletRequest.getSession();
+		Users ub = (Users) session.getAttribute("identity");
+		// 有身分物件就放行
+		if (ub != null) {
+			chain.doFilter(request, response);
+		} else {
+			// 沒有則確認cookie，cookie時間是2小時，若cookie還存在則重新驗證
+			String userName = "";
+			String userPwd = "";
+			Cookie[] cookies = httpServletRequest.getCookies();
+			for (int i = 0; cookies != null && i < cookies.length; i++) {
+				if ("user".equals(cookies[i].getName())) {
+					String string = cookies[i].getValue();
+					String[] values = string.split("&");
+					userName = values[0];
+					userPwd = values[1];
 				}
 			}
+			UsersService us = new UsersService(new UsersDAOImpl(sessionFactory));
+			try {
+				Map<String, Object> info = us.queryUser(new Users(userName, userPwd));
+				ub = (Users) info.get("uBean");
+				// 重新加入身分物件並放行
+				if (ub != null) {
+					httpServletRequest.getSession().setAttribute("identity", ub);
+					chain.doFilter(request, response);
+				}
+				// cookie逾期，導回登入頁面
+				else {
+					httpServletResponse.sendRedirect("login.jsp");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

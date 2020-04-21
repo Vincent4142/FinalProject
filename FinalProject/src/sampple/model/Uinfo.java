@@ -26,6 +26,7 @@ public class Uinfo {
 	private String tel;
 	private String ademail;
 	private String utype;
+	private String picture;
 	private Users users;
 	
 	@GenericGenerator(name="generator",strategy = "foreign",parameters = @Parameter(name="property",value="users"))
@@ -110,6 +111,13 @@ public class Uinfo {
 	}
 	public void setAdemail(String ademail) {
 		this.ademail = ademail;
+	}
+	@Column(name="picture")
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 	
 	

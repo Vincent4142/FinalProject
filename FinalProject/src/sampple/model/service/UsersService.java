@@ -51,8 +51,8 @@ private UsersDAO usersDao;
 	 *  @return boolean
 	 *  
 	 * */
-	public boolean updatePwd(Users user, String type) {
-		return usersDao.updatePwd(user, type);
+	public boolean update(Users user) {
+		return usersDao.update(user);
 	}
 	
 	//註冊驗證信修改激活狀態為Y
@@ -76,9 +76,14 @@ private UsersDAO usersDao;
 		return usersDao.updatePassword(email, password);
 	}
 	
-	//
-	public Uinfo identity(Users user) {
-		return usersDao.identity(user);
+	//修改使用者頭像
+	public void updatePicture(Users user) {
+			
+		usersDao.updatePicture(user);
 	}
+	
+	
+	
+	
 
 }

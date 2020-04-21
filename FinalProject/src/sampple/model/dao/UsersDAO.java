@@ -33,7 +33,7 @@ public interface UsersDAO {
 	 * @return boolean
 	 * 
 	 */
-	public boolean updatePwd(Users user, String type);
+	public boolean update(Users user);
 	
 	public boolean updateStatus(int syssn);
 	
@@ -43,13 +43,10 @@ public interface UsersDAO {
 	
 	public boolean updatePassword(String email,String password);
 	
-
+	//修改使用者頭像
+	public void updatePicture(Users user);
+		
 	
-	/**
-	 * 	身分驗證
-	 *  @param Users
-	 *  @param String
-	 *  
-	 * */
-	public Uinfo identity(Users user);
+	
+
 }

@@ -30,7 +30,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
+<link rel="stylesheet" href="css/register.css">
 
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -66,13 +66,31 @@
 						<span id="img1"></span><span id="txt1"></span>
 					</p>
 					<!-- CheckReg()1 -->
-					<script type="text/javascript">
-
+					<script type="text/javascript">					
+					
+						//表單送出時先驗證
 						function checksubmit(){
 							if(document.getElementById("txt1").innerHTML=="此帳號已重複"){
 								window.alert("帳號欄位不正確，請重新輸入");
 								return false;
-							}else{
+							}
+							else if(document.getElementById("pwd").innerHTML!=""){
+								window.alert("密碼欄位不正確，請重新輸入");
+								return false;
+							}
+							else if(document.getElementById("repwd").innerHTML!=""){
+								window.alert("二次密碼欄位不正確，請重新輸入");
+								return false;
+							}
+							else if(document.getElementById("nickName").innerHTML!=""){
+								window.alert("暱稱欄位不正確，請重新輸入");
+								return false;
+							}
+							else if(document.getElementById("userId").innerHTML!=""){
+								window.alert("身分證欄位不正確，請重新輸入");
+								return false;
+							}
+							else{
 								return true;
 							}
 						}
@@ -119,9 +137,7 @@
 									}
 								})	
 							}
-							//if (txtValue == "") {
-								
-							//}
+						
 						}
 					</script>
 					<!-- form-group// -->
@@ -149,6 +165,7 @@
 						<p class="text-center rexColor1" style="float: left;">
 							<span class="rexColor1">
 								<span id="img2"></span><span id="txt2"></span>
+								<span id="strong" style="display:none"></span>
 							</span>
 						</p>
 						<p class="text-center rexColor1" style="float: right;">
@@ -159,13 +176,25 @@
 					</div>
 					<!-- CheckReg2()、CheckReg3() -->
 					<script type="text/javascript">
+
 						// callback function
 						function checkReg2() {
 							var rexEng = /[A-Za-z]/
 							var rexNum = /[0-9]/
+							var strValue = document.getElementById("strong")
 							var imgValue = document.getElementById("img2")
 							var txtValue = document.getElementById("txt2")
 							var pwdValue = document.getElementById("pwd").value
+							//判斷密碼強度，總分9
+							var score = 0;
+							//判斷大寫
+							var rexBig = /[A-Z]/
+							//判斷小寫
+							var rexLittle = /[a-z]/
+							//判斷特殊符號
+							var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");	
+
+							
 							// 不能為空值
 							if (pwdValue == "") {
 								imgValue.innerHTML = '<i class="fa fa-times">'
@@ -189,6 +218,44 @@
 								imgValue.innerHTML = "";
 								txtValue.innerHTML = "";
 							}
+
+							//密碼強度
+							if(txtValue.innerHTML==""){
+								$("#strong").css("display",'');
+								
+								if (pwdValue.length >= 6) {
+									score+=1;
+									if(pwdValue.length >= 10){
+										score+=2;
+									}
+									if(rexNum.test(pwdValue)){
+										score+=1;
+									}
+									if(rexBig.test(pwdValue)){
+										score+=2;
+									}
+									if(rexLittle.test(pwdValue)){
+									score+=1;
+									}
+									if(pattern.test(pwdValue)){
+										score+=2;
+									}
+
+									if(score<=3){
+										strValue.innerHTML="密碼程度:弱";
+									}
+									else if(score>3 && score<7){
+										strValue.innerHTML="密碼程度:中";
+									}
+									else{
+										strValue.innerHTML="密碼程度:強";
+									}	
+								}
+							}
+							else{
+								$("#strong").css("display",'none');
+							}	
+							
 						}
 						// callback function
 						function checkReg3() {
@@ -317,8 +384,8 @@
 						</div>
 						<select id="gender" class="form-control" name="gender">
 							<option value="">請選擇性別</option>
-							<option value="male">男</option>
-							<option value="female">女</option>
+							<option value="男">男</option>
+							<option value="女">女</option>
 						</select>
 
 						<!-- 出生年月日  -->
@@ -416,7 +483,7 @@
 					<p class="text-center">
 						<!-- Button trigger modal -->
 						<label data-toggle="modal" data-target="#exampleModalCenter"><a
-							href="#">隱私權條款</a></label> 已經註冊過了? <a class="rexColor1" href="loginSystem.jsp"><b>登入</b></a>
+							href="">隱私權條款</a></label> 已經註冊過了? <a class="rexColor1" href="loginSystem.jsp"><b>登入</b></a>
 					</p>
 					<div>
 						<input type="button" value="一鍵輸入" onclick="input()">
@@ -492,6 +559,9 @@
 			$("#address").val("台北市中正區中正路10號");
 			$("#ph").val("0958744563");
 			checkReg1();
+			checkReg2();
+			checkReg4();
+			checkReg5();
 			//form1.submit();
 			
 		}

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import sampple.model.Uinfo;
 import sampple.model.Users;
 import sampple.model.service.UsersService;
+import sampple.util.CryptUtil;
 import sampple.util.VerifyUtil;
 
 @Controller
@@ -67,7 +68,6 @@ public class CheckLoginSystem {
 		String msg = null;
 		Map<String, Object> info = usersService.queryUser(new Users(email, password));
 		if (info.get("msg") != null) {
-			System.out.println("msg" + msg);
 			msg = (String) info.get("msg");
 
 		}
@@ -93,9 +93,10 @@ public class CheckLoginSystem {
 			// 建立身分物件存於Session
 			Users ub = (Users) info.get("uBean");
 			model.addAttribute("identity", ub);
-			System.out.println("name: " + ub.getUinfo().getName());
+			
 			// 建立cookie來儲存使用者資訊
-			Cookie cookie = new Cookie("user", email + "&" + password);
+			String cryptPassword = new CryptUtil().encoding(password);
+			Cookie cookie = new Cookie("user", email + "&" + cryptPassword + "&" + ub.getUinfo().getName());
 			cookie.setPath("/");
 			cookie.setMaxAge(1 * 60 * 60 * 2); // 二小時的有效時間
 			response.addCookie(cookie);

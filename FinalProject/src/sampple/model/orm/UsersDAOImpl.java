@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import sampple.model.Uinfo;
 import sampple.model.Users;
 import sampple.model.dao.UsersDAO;
+import sampple.util.CryptUtil;
 import sampple.util.LogUtil;
 
 @Repository
@@ -49,43 +50,38 @@ public class UsersDAOImpl implements UsersDAO {
 
 	@Override
 	public Map<String, Object> queryUser(Users user) {
-		
+
 		Map<String, Object> info = new HashMap<String, Object>();
 		// 不通過
 		String msg = "09";
 		// 需加密
-		String password = user.getPassword();
+		String password = new CryptUtil().encoding(user.getPassword());
+		// String password = user.getPassword();
 		Query<Users> query = sessionFacotry.getCurrentSession().createQuery(HQL_QUERY_ID, Users.class)
 				.setParameter("userName", user.getEmail());
 		Users result = query.getSingleResult();
 
-		//帳號是否存在
+		// 帳號是否存在
 		if (!result.getDeleteFlag().equals("Y")) {
-			//是否激活
-			if(result.getStatus().equalsIgnoreCase("N")) {
-				msg="03";
+			// 是否激活
+			if (result.getStatus().equalsIgnoreCase("N")) {
+				msg = "03";
 			}
-			//驗證密碼
+			// 驗證密碼
 			else if (result.getPassword().equals(password)) {
 				// 通過
 				Users ub = new Users();
-				
-				System.out.println("result.getEmail()"+result.getEmail());
-				
 				ub.setEmail(result.getEmail());
-				
+
 				Uinfo uinfo = new Uinfo();
-				
-				System.out.println("result.getUinfo().getName()"+result.getUinfo().getName());
-				
 				uinfo.setName(result.getUinfo().getName());
-			    uinfo.setUtype(result.getUinfo().getUtype());
-			    
-			    ub.setUinfo(uinfo);
-			    
+				uinfo.setUtype(result.getUinfo().getUtype());
+
+				ub.setUinfo(uinfo);
+
 				info.put("uBean", ub);
 				msg = "01";
-				
+
 			} else {
 				// 密碼錯誤
 				msg = "02";
@@ -99,18 +95,24 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 
 	@Override
-	public boolean updatePwd(Users user, String type) {
+	public boolean update(Users user) {
 		boolean status = false;
 		try {
 			Session session = sessionFacotry.getCurrentSession();
-
-			if (type.equals("Y")) {
-				user.setDeleteFlag("Y");
+			Query<Users> query = session.createQuery(HQL_QUERY_ID, Users.class).setParameter("userName",
+					user.getEmail());
+			Users result = query.getSingleResult();
+			
+			if (result != null) {
+				result.getUinfo().setName(user.getUinfo().getName());
+				result.getUinfo().setBirth(user.getUinfo().getBirth());
+				result.getUinfo().setTel(user.getUinfo().getTel());
+				result.getUinfo().setAddr(user.getUinfo().getAddr());
+				result.getUinfo().setAdemail(user.getUinfo().getAdemail());
+				session.update(result);
+				status = true;
 			}
 
-			session.update(user);
-
-			status = true;
 		} catch (Exception e) {
 			logger.log(Level.ERROR, e);
 		}
@@ -126,8 +128,6 @@ public class UsersDAOImpl implements UsersDAO {
 			Query<Users> query = session.createQuery("from Users where SYS_SN=:sys", Users.class);
 			query.setParameter("sys", syssn);
 			Users user = query.getSingleResult();
-			// List<Users> list = query.list();
-			// Users user = list.get(0);
 
 			user.setStatus("Y");
 			session.update(user);
@@ -143,20 +143,15 @@ public class UsersDAOImpl implements UsersDAO {
 	public boolean verifyEmail(String email) {
 		boolean status = false;
 
+		Session session = sessionFacotry.getCurrentSession();
+		Query<Users> query = session.createQuery("from Users where EMAIL=:email", Users.class);
+		query.setParameter("email", email);
 
-			Session session = sessionFacotry.getCurrentSession();
-			Query<Users> query = session.createQuery("from Users where EMAIL=:email", Users.class);
-			query.setParameter("email", email);
-			
-			// List<Users> list = query.list();
-			// Users user = list.get(0);
-			if(query.uniqueResult()!=null) {
-				status = true;
-				return status;
-			}
-			
-			
-		
+		if (query.uniqueResult() != null) {
+			status = true;
+			return status;
+		}
+
 		return status;
 	}
 
@@ -178,10 +173,8 @@ public class UsersDAOImpl implements UsersDAO {
 			Query<Users> query = session.createQuery("from Users where EMAIL=:email", Users.class);
 			query.setParameter("email", email);
 			Users user = query.getSingleResult();
-			// List<Users> list = query.list();
-			// Users user = list.get(0);
 
-			user.setPassword(password);
+			user.setPassword(new CryptUtil().encoding(password));
 			session.update(user);
 			status = true;
 
@@ -190,22 +183,16 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		return status;
 	}
-
+	
 	@Override
-	public Uinfo identity(Users users) {
-		Uinfo uinfo = new Uinfo();
-		String hql_Data = "From U_Info WHERE SYS_SN = :id";
-		System.out.println("id:" + users.getSysSn());
+	public void updatePicture(Users user) {
 		Session session = sessionFacotry.getCurrentSession();
-		System.out.println("test:" + session.isOpen());
-		Query<Uinfo> query = session.createQuery(hql_Data, Uinfo.class).setParameter("id", users.getSysSn());
-		Uinfo result = query.getSingleResult();
-
-		if (result != null) {
-			uinfo.setName(result.getName());
-			uinfo.setUtype(result.getName());
-		}
-		return uinfo;
+		Query<Users> query = session.createQuery(HQL_QUERY_ID, Users.class).setParameter("userName",
+				user.getEmail());
+		Users result = query.getSingleResult();
+		
+		result.getUinfo().setPicture(user.getUinfo().getPicture());
+		session.update(result);
 	}
 
 }

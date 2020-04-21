@@ -117,7 +117,8 @@ span.psw {
 				<label for="psw"><b>請輸入密碼</b></label> <input type="password"
 					placeholder="請輸入密碼" name="password" id="pwd" onkeyup="checkReg2()"
 					required> 
-				<span style="color: red" id="txt2"></span><br><br>
+				<span style="color: red" id="txt2"></span>
+				<span id="strong" style="display:none"></span><br><br>
 							
 					
 					<label for="psw-repeat"><b>請再次輸入密碼</b></label> <input
@@ -161,9 +162,20 @@ span.psw {
 		function checkReg2() {
 			var rexEng = /[A-Za-z]/
 			var rexNum = /[0-9]/
-			
+			var strValue = document.getElementById("strong")
 			var txtValue = document.getElementById("txt2")
 			var pwdValue = document.getElementById("pwd").value
+
+			//判斷密碼強度，總分9
+			var score = 0;
+			//判斷大寫
+			var rexBig = /[A-Z]/
+			//判斷小寫
+			var rexLittle = /[a-z]/
+			//判斷特殊符號
+			var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");	
+
+			
 			// 不能為空值
 			if (pwdValue == "") {
 				
@@ -187,6 +199,44 @@ span.psw {
 				
 				txtValue.innerHTML = "";
 			}
+
+
+			//密碼強度
+			if(txtValue.innerHTML==""){
+				$("#strong").css("display",'');
+				
+				if (pwdValue.length >= 6) {
+					score+=1;
+					if(pwdValue.length >= 10){
+						score+=2;
+					}
+					if(rexNum.test(pwdValue)){
+						score+=1;
+					}
+					if(rexBig.test(pwdValue)){
+						score+=2;
+					}
+					if(rexLittle.test(pwdValue)){
+					score+=1;
+					}
+					if(pattern.test(pwdValue)){
+						score+=2;
+					}
+
+					if(score<=3){
+						strValue.innerHTML="密碼程度:弱";
+					}
+					else if(score>3 && score<7){
+						strValue.innerHTML="密碼程度:中";
+					}
+					else{
+						strValue.innerHTML="密碼程度:強";
+					}	
+				}
+			}
+			else{
+				$("#strong").css("display",'none');
+			}	
 		}
 		// callback function
 		function checkReg3() {
