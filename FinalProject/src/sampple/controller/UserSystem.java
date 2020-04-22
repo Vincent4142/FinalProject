@@ -185,11 +185,10 @@ public class UserSystem {
 			model.addAttribute("data", data);
 			return "update.jsp";
 		}
-
+		//修改基本資料
 		@RequestMapping(path = "/updateData.action", method = RequestMethod.POST)
 		public String processUpdateData(@RequestParam("name") String name, @RequestParam("birth") String birth,
-				@RequestParam("tel") String tel, @RequestParam("addr") String addr, Model model,
-				@RequestParam(defaultValue = "N", value = "ademail") String ademail, 
+				@RequestParam("tel") String tel, @RequestParam("addr") String addr, Model model, 
 				HttpServletResponse response, HttpServletRequest request) throws IOException {
 
 			PrintWriter out = response.getWriter();
@@ -201,8 +200,8 @@ public class UserSystem {
 			uinfo.setBirth(birth);
 			uinfo.setTel(tel);
 			uinfo.setAddr(addr);
-			uinfo.setAdemail(ademail);
-
+			
+			
 			users.setUinfo(uinfo);
 			uinfo.setUsers(users);
 			

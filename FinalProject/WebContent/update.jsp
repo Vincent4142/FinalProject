@@ -297,12 +297,7 @@
 						</script>
 						<!-- form-group// -->
 
-						<div id="ademail" class="form-group input-group"
-							style="display: none;">
-							<label><input type="checkbox" checked="checked"
-								name="ademail" id="ademail" value="Y"
-								style="margin-bottom: 15px;">同意寄送最新產品廣告 </label>
-						</div>
+						
 						<!-- form-group// -->
 					</form>
 					<!-- form-group end.// -->

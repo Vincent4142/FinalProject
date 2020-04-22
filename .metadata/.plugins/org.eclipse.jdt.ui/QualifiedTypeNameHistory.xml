@@ -38,4 +38,7 @@
 <fullyQualifiedTypeName name="sampple.util.CryptUtil"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
+<fullyQualifiedTypeName name="javax.mail.internet.MimeBodyPart"/>
+<fullyQualifiedTypeName name="javax.mail.Multipart"/>
+<fullyQualifiedTypeName name="javax.mail.internet.MimeMultipart"/>
 </qualifiedTypeNameHistroy>

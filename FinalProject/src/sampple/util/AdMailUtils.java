@@ -15,13 +15,16 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.mail.internet.MimeMultipart;
 
 public class AdMailUtils {
 	
@@ -29,10 +32,6 @@ public class AdMailUtils {
     	//取得所有用戶email
     	String[] userMails = getRecipients();
     	
-    	//ArrayList<String> userMails = new ArrayList<String>();//存放所有用戶的email
-    	//for(Users u:list) {
-    	//	userMails.add(u.getEmail());
-    	//}
     	
     	String host = "smtp.gmail.com";
     	int port=587; //Gmail的端口號
@@ -71,8 +70,8 @@ public class AdMailUtils {
         		//郵件主題
         		message.setSubject("台灣sampple網廣告信~");
         		//郵件內容
-        		//String emailMsg = buildMsg(subject,userName,url);
-        		message.setContent("AD-emailMsg_test", "text/html;charset=utf-8");
+        		Multipart emailMsg = buildMsg();
+        		message.setContent(emailMsg, "text/html;charset=utf-8");
 
             
         		//創建 Transport用來發送郵件
@@ -86,15 +85,46 @@ public class AdMailUtils {
     }
     
     //創建郵件內容
-    public static String buildMsg(String subject, String userName, String url) {
-		// 123@gmail.com > 123
-		userName = userName.substring(0, userName.indexOf('@'));
-		
-		return "<html><head><title>" + subject +"</title></head>"
-			+ "<body> 親愛的 " + userName + " 您好,</br>"
-			+ "請點擊以下連結進行" + subject + "作業</br>"
-			+ url
-			+ "</body></html>";
+    public static Multipart buildMsg() {
+    	//讀取HTML
+    	File recipientsFile = new File("C:/DataSource/FinalProject/FinalProject/WebContent/Flash Sale.html");
+        InputStream in = null;
+        BufferedReader br = null;
+        StringBuilder builder = new StringBuilder();
+        try {
+            in = new FileInputStream(recipientsFile);
+            br = new BufferedReader(new InputStreamReader(in));
+            String line = null;
+            // 讀入
+            while ((line = br.readLine()) != null) {
+                builder.append(line);
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+                if (in != null)
+                    in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+      //讀取html code
+        MimeBodyPart textPart = new MimeBodyPart();
+        Multipart email = new MimeMultipart();
+        try {
+			textPart.setContent(builder.toString(), "text/html; charset=UTF-8");
+	        email.addBodyPart(textPart);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        
+		return email;
 	}
     
     //獲取所有收件人方式
